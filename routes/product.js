@@ -10,14 +10,14 @@ const {
 
 const router = Router();
 
-router.post("/", handleAddProduct());
+router.post("/", handleAddProduct);
 
-router.get("/", handleGetAllProducts());
+router.get("/", handleGetAllProducts);
 
-router.get("/:id", handleGetProductById());
+router.get("/:id", handleGetProductById);
 
-router.put("/:id", handleUpdateProductById());
+router.put("/:id", handleUpdateProductById);
 
-router.delete("/:id", handleDeleteProductById());
+router.delete("/:id", handleDeleteProductById);
 
 module.exports = router;

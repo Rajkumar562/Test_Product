@@ -15,5 +15,5 @@ dbSync();
 
 app.listen(PORT, () => {
   console.log(`Server running at PORT : ${PORT}`);
-  dbConnection;
+  dbSync();
 });
