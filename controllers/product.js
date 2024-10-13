@@ -27,7 +27,7 @@ function handleAddProduct() {
 function handleGetAllProducts() {
   return async (req, res) => {
     try {
-      const { page = 1, limit = 10, name, category } = req.query;
+      let { page = 1, limit = 10, name, category } = req.query;
       const offset = (page - 1) * limit;
 
       const where = {};
@@ -38,16 +38,17 @@ function handleGetAllProducts() {
         where.category = { [Op.like]: `%${category}%` };
       }
 
-      // if (typeof page != Number || typeof limit != Number) {
-      //   res.status(404).json({
-      //     success: false,
-      //     msg: "Value Of limit or page should be number",
-      //   });
-      // }
+      page = parseInt(page);
+      limit = parseInt(limit);
+      if (isNaN(page) || isNaN(limit)) {
+        return res.status(404).json({
+          msg: "Value Of limit or page should be number",
+        });
+      }
 
       const { count, rows: products } = await ProductModel.findAndCountAll({
         where,
-        limit: parseInt(limit),
+        limit: limit,
         offset,
       });
 
